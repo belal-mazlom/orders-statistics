@@ -1,0 +1,51 @@
+<div class="page-quick-sidebar-wrapper" data-close-on-body-click="false">
+    <div class="page-quick-sidebar">
+        <div class="page-quick-sidebar-settings">
+            <div class="page-quick-sidebar-settings-list">
+                <h3 class="list-heading">Filters
+                <i class="close-filter icon-close"></i>
+                </h3>
+                <ul class="list-items borderless">
+                    <li class="list-item"> Stores:
+                        <select id="stores-list" class="form-control select2-multiple" multiple>
+{{#each stores}}
+    <option value="{{id}}"
+            >{{title}}</option>
+{{/each}}
+                        </select>
+                    </li>
+                    <li class="list-item"> Time frame:
+                        <select id="timeframe-list" class="form-control select2">
+                            <option value="-1">All</option>
+                            <option value="1">Last year</option>
+                            <option value="2">Last quarter</option>
+                            <option value="3">Last month</option>
+                            <option value="4">This year</option>
+                            <option value="5">This quarter</option>
+                            <option value="6">This month</option>
+                        </select>
+                    </li>
+                    <li class="list-item"> Order status:
+                        <select id="order-status-list" class="form-control select2-multiple" multiple>
+                            <option value="complete">Complete</option>
+                            <option value="processing">Processing</option>
+                            <option value="pending">Pending</option>
+                            <option value="pending_payment">Pending Payment</option>
+                            <option value="canceled">Canceled</option>
+                            <option value="closed">Closed</option>
+                            <option value="on_hold">On hold</option>
+                        </select>
+                    </li>
+                    <li class="list-item none-hover">
+                        <button class="filter-btn btn blue"><i class="icon-magic-wand"></i> Filter</button>
+                        <button class="reset-filter-btn btn"><i class="icon-reload"></i> Reset</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#each filtersSlider}}
+<input type="hidden" name="selected-{{@key}}" value="{{this}}">
+{{/each}}

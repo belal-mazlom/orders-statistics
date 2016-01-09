@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - misc_statistic@dev-stage.cloudapp.net" uuid="8595b050-daec-4a59-bc4d-b1aa03fb8aa2">
+      <secret-storage>master_key</secret-storage>
+      <user-name>misc_statistic</user-name>
+      <schema-pattern>misc_statistic.*</schema-pattern>
+      <default-schemas>misc_statistic.*</default-schemas>
+    </data-source>
+  </component>
+</project>

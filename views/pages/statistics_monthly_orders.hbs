@@ -1,0 +1,66 @@
+<div class="clearfix"> </div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    {{> filters}}
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <!-- BEGIN SIDEBAR -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <div class="page-sidebar navbar-collapse collapse">
+            {{> menu}}
+        </div>
+        <!-- END SIDEBAR -->
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <!-- BEGIN PAGE HEAD-->
+            <div class="page-head">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Statistics</h1>
+                </div>
+                <!-- END PAGE TITLE -->
+                <!-- BEGIN PAGE TOOLBAR -->
+                <div class="page-toolbar">
+                </div>
+                <!-- END PAGE TOOLBAR -->
+            </div>
+            <!-- END PAGE HEAD-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light portlet-fit bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-bar-chart font-green"></i>
+                                <span class="caption-subject font-green bold uppercase">Monthly Orders</span>
+                            </div>
+                            <div class="actions">
+                                <a class="btn green btn-outline btn-circle filter-slider-btn" href="javascript:;" >
+                                    <i class="icon-magnifier"></i>
+                                    <span class="hidden-xs"> Filters </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="">
+                                <label><input type="radio" name="charttype" value="1" checked> Total orders</label>
+                                <label><input type="radio" name="charttype" value="2"> Order values</label>
+                            </div>
+
+                            <div id="monthly-orders-chart" style="height:500px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->

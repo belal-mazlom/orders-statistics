@@ -1,0 +1,86 @@
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <!-- BEGIN SIDEBAR -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <div class="page-sidebar navbar-collapse collapse">
+            {{> menu}}
+        </div>
+        <!-- END SIDEBAR -->
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <!-- BEGIN PAGE HEAD-->
+            <div class="page-head">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Users</h1>
+                </div>
+                <!-- END PAGE TITLE -->
+                <!-- BEGIN PAGE TOOLBAR -->
+                <div class="page-toolbar">
+                </div>
+                <!-- END PAGE TOOLBAR -->
+            </div>
+            <!-- END PAGE HEAD-->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet light bordered">
+
+                        <div class="portlet-body">
+                            <div class="table-toolbar">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-bordered table-hover" id="datatable_users">
+                                <thead>
+
+                                <tr role="row" class="heading">
+                                    <th> Username </th>
+                                    <th> Email </th>
+                                    <th> Status </th>
+                                </tr>
+                                <tr role="row" class="filter">
+                                    <td>
+                                        <input type="text" class="form-control form-filter input-sm" name="username">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-filter input-sm" name="email">
+                                    </td>
+                                    <td>
+                                        <select name="status" class="form-control form-filter input-sm">
+                                            <option value="">Select...</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Disabled</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
