@@ -21,6 +21,16 @@ function requestData() {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
+            //calc totals
+            var total = 0.0;
+            for (var i = 0; i < data.series.length; i++) {
+                for(var j = 0; j < data.series[i].data.length;j++){
+                    total += data.series[i].data[j];
+                }
+            }
+
+            $(".total-values").html("Totals: $ " + (total).formatMoney(0, '.', ','));
+
             showOrdersData(data);
         }
     });
@@ -55,7 +65,7 @@ function showOrdersData(data) {
             }]
         },
         tooltip: {
-            valueSuffix: '$',
+            valuePrefix: '$',
             pointFormat: '{series.name}: <b>{point.y}</b>'
         },
         legend: {

@@ -1,5 +1,5 @@
 <!-- BEGIN HEADER & CONTENT DIVIDER -->
-<div class="clearfix"> </div>
+<div class="clearfix"></div>
 <!-- END HEADER & CONTENT DIVIDER -->
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
@@ -21,53 +21,46 @@
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
-            <!-- BEGIN PAGE HEAD-->
-            <div class="page-head">
-                <!-- BEGIN PAGE TITLE -->
-                <div class="page-title">
-                    <h1>Orders</h1>
-                </div>
-                <!-- END PAGE TITLE -->
-                <!-- BEGIN PAGE TOOLBAR -->
-                <div class="page-toolbar">
-                </div>
-                <!-- END PAGE TOOLBAR -->
-            </div>
-            <!-- END PAGE HEAD-->
-
             <div class="row">
                 <div class="col-md-12">
                     <!-- BEGIN EXAMPLE TABLE PORTLET-->
                     <div class="portlet light bordered">
-
-                        <div class="portlet-body">
-                            <div class="table-toolbar">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                    </div>
-                                    <div class="col-md-6 text-right">
-                                        <a class="btn blue btn-outline btn-circle filter-slider-btn" href="javascript:;" >
-                                            <i class="icon-magnifier"></i>
-                                            <span class="hidden-xs"> Filters </span>
-                                        </a>
-                                    </div>
-                                </div>
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject font-green bold uppercase">Orders</span>
+                                <br/>
+                                <span class="caption-helper total-values"></span>
                             </div>
-                            <table class="table table-striped table-bordered table-hover order-column" id="datatable_orders">
+                            <div class="actions">
+                                <a href="/export/order-list" target="_blank"
+                                   class="btn green btn-outline btn-circle export-btn">
+                                    <i class="icon-cloud-download"></i>
+                                    <span class="hidden-xs"> Export </span>
+                                </a>
+                                <a class="btn blue btn-outline btn-circle filter-slider-btn"
+                                   href="javascript:;">
+                                    <i class="icon-magnifier"></i>
+                                    <span class="hidden-xs"> Filters </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <table class="table table-striped table-bordered table-hover order-column"
+                                   id="datatable_orders">
                                 <thead>
                                 <tr role="row" class="heading">
-                                    <th> Store </th>
-                                    <th> order number </th>
-                                    <th> Customer </th>
-                                    <th> Email </th>
-                                    <th> Sub Total </th>
-                                    <th> Total </th>
-                                    <th> Currency </th>
+                                    <th> Store</th>
+                                    <th> order number</th>
+                                    <th> Customer</th>
+                                    <th> Email</th>
+                                    <th> Sub Total</th>
+                                    <th> Total</th>
+                                    <th> Currency</th>
                                     <th> Payment type</th>
                                     <th> Payment status</th>
-                                    <th> Shipping type </th>
-                                    <th> Country </th>
-                                    <th width="40%"> Place date </th>
+                                    <th> Shipping type</th>
+                                    <th> Country</th>
+                                    <th width="40%"> Place date</th>
                                 </tr>
                                 <!--<tr role="row" class="filter">
                                     <td>

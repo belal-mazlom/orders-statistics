@@ -10,11 +10,12 @@ $(document).ready(function () {
 
     $('input[name="charttype"]').change(function () {
         requestDataCountries($(this).val());
+        $(".export-btn").attr("href", "/export/countries-statistics?type=" + $(this).val());
     });
     requestDataCountries(1);
 });
 
-function requestData(){
+function requestData() {
     requestDataCountries($('input[name="charttype"]:checked').val());
 }
 
@@ -30,6 +31,17 @@ function requestDataCountries(type) {
         },
         dataType: 'JSON',
         success: function (data) {
+            var total = 0.0;
+            for (var i = 0; i < data.length; i++) {
+                total += data[i][1];
+            }
+
+            if (type == 2) {
+                $(".total-values").html("Totals: $ " + (total).formatMoney(0, '.', ','));
+            } else {
+                $(".total-values").html("Totals: " + (total).formatMoney(0, '.', ','));
+            }
+
             showCountriesData(data, type);
         }
     });
@@ -66,7 +78,7 @@ function showCountriesData(data, type) {
             enabled: false
         },
         tooltip: {
-            valueSuffix: (type == 1 ? '' : '$'),
+            valuePrefix: (type == 1 ? '' : '$'),
             pointFormat: (type == 1 ? 'Total orders' : 'Order values') + ': <b>{point.y}</b>'
         },
         series: [{
@@ -78,7 +90,7 @@ function showCountriesData(data, type) {
                 color: '#FFFFFF',
                 align: 'right',
                 y: 10, // 10 pixels down from the top
-                format: (type == 1 ? '' : '{point.y:,.0f}$'),
+                format: (type == 1 ? '' : '${point.y:,.0f}'),
                 style: {
                     fontSize: '13px',
                     fontFamily: 'Verdana, sans-serif'

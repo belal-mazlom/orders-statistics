@@ -1,0 +1,92 @@
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <!-- BEGIN SIDEBAR -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <div class="page-sidebar navbar-collapse collapse">
+            {{> menu}}
+        </div>
+        <!-- END SIDEBAR -->
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <!-- BEGIN PAGE HEAD-->
+            <div class="page-head">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>New store</h1>
+                </div>
+                <!-- END PAGE TITLE -->
+                <!-- BEGIN PAGE TOOLBAR -->
+                <div class="page-toolbar">
+                </div>
+                <!-- END PAGE TOOLBAR -->
+            </div>
+            <!-- END PAGE HEAD-->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet light bordered">
+
+                        <div class="portlet-body">
+                            <div class="table-toolbar">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{#if_eq status -1}}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true"></button>
+                                    Invalid parameters
+                                </div>
+                            {{/if_eq}}
+
+                            {{#if_eq status 1}}
+                                <div class="alert alert-success alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true"></button>
+                                    Added successfully
+                                </div>
+                            {{/if_eq}}
+
+                            <form action="/data/enter-store" method="post">
+                                <div class="form-body">
+                                    <div class="form-group form-md-line-input">
+                                        <input type="text" id="form_control_1" name="title" class="form-control"
+                                               placeholder="Enter Store title">
+                                        <label for="form_control_1">Title</label>
+                                    </div>
+                                    <div class="form-group form-md-line-input">
+                                        <input type="text" id="form_control_2" name="url" class="form-control"
+                                               placeholder="Enter Store URL">
+                                        <label for="form_control_2">URL</label>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn green">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->

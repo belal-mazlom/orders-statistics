@@ -10,11 +10,12 @@ $(document).ready(function () {
 
     $('input[name="charttype"]').change(function () {
         requestDataMonthlyOrders($(this).val());
+        $(".export-btn").attr("href", "/export/monthly-orders-statistics?type=" + $(this).val());
     });
     requestDataMonthlyOrders(1);
 });
 
-function requestData(){
+function requestData() {
     requestDataMonthlyOrders($('input[name="charttype"]:checked').val());
 }
 
@@ -30,6 +31,17 @@ function requestDataMonthlyOrders(type) {
         },
         dataType: 'JSON',
         success: function (data) {
+            var total = 0.0;
+            for (var i = 0; i < data.length; i++) {
+                total += data[i][1];
+            }
+
+            if (type == 2) {
+                $(".total-values").html("Totals: $ " + (total).formatMoney(0, '.', ','));
+            } else {
+                $(".total-values").html("Totals: " + (total).formatMoney(0, '.', ','));
+            }
+
             showCountriesData(data, type);
         }
     });
@@ -41,7 +53,7 @@ function showCountriesData(data, type) {
             type: 'column'
         },
         title: {
-            text: (type == 1 ?'Monthly total orders':'Monthly values orders')
+            text: (type == 1 ? 'Monthly total orders' : 'Monthly values orders')
         },
         subtitle: {
             text: ''
@@ -66,7 +78,7 @@ function showCountriesData(data, type) {
             enabled: false
         },
         tooltip: {
-            valueSuffix: (type == 1 ? '' : '$'),
+            valuePrefix: (type == 1 ? '' : '$'),
             pointFormat: (type == 1 ? 'Total orders' : 'Order values') + ': <b>{point.y}</b>'
         },
         series: [{

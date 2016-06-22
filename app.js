@@ -14,13 +14,21 @@ var logger = require('morgan');
 var hbs = require('hbs');
 
 var mysql = require('mysql');
-var connection;
-var pool  = mysql.createPool(config.mysqlConfig);
+var pool = mysql.createPool(config.mysqlConfig);
 
 var app = express();
 
-var routes = require('./routes/index')(passport, pool, fs);
+var routes = require('./routes/index')(passport, pool, fs, config);
 
+pool.on('error', function (err) {
+    try {
+        pool.end(function (err) {
+        });
+    } catch (e) {
+    }
+
+    pool = mysql.createPool(config.mysqlConfig)
+});
 
 //----------- Template Settings------------------
 
@@ -35,7 +43,6 @@ hbs.registerHelper('if_eq', function (a, b, opts) {
     else
         return opts.inverse(this);
 });
-
 
 //----------- App middleware Settings------------------
 // view engine setup
@@ -55,16 +62,35 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new passportLocal.Strategy(function (username, password, done) {
-    if (username == "info@shopgo.me" && password == "admin321") {
-        done(null, {id: 1, username: "shopgo", email: "info@shopgo.me", "role_id": -1});
-    } else {
-        done(null, null);
-    }
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            done(null, null);
+            return;
+        }
+
+        connection.query("SELECT id, username, email, active, role_id from `user` where password = sha1(?) and (username = ? or email = ?)", [password, username, username], function (err, rows, fields) {
+            if (err) {
+                done(null, null);
+                return;
+            }
+            connection.release();
+
+            if (rows.length > 0 && rows[0].active > 0) {
+                done(null, {
+                    id: rows[0].id,
+                    username: rows[0].username,
+                    email: rows[0].email,
+                    role_id: rows[0].role_id
+                });
+            } else {
+                done(null, null);
+            }
+        });
+    });
 }));
 
 passport.serializeUser(function (user, done) {
@@ -72,7 +98,24 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-    done(null, {id: id, username: "shopgo", email: "info@shopgo.me", "role_id": -1});
+    pool.getConnection(function (err, connection) {
+        if (err) return;
+
+        connection.query("SELECT id, username, email, active, role_id from `user` where id = ?", [id], function (err, rows, fields) {
+            if (err) return;
+
+            connection.release();
+
+            if (rows.length > 0 && rows[0].active > 0) {
+                 done(err, {
+                    id: rows[0].id,
+                    username: rows[0].username,
+                    email: rows[0].email,
+                    role_id: rows[0].role_id
+                });
+            }
+        });
+    });
 });
 
 
@@ -88,10 +131,6 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-
-// error handlers
-
-// development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
