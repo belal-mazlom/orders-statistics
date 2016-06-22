@@ -66,7 +66,7 @@ module.exports = function (passport, pool, fs, appConfig) {
      /* GET home page. */
     router.get('/', function (req, res, next) {
         if (req.isAuthenticated()) {
-            res.redirect('/users/list');
+            res.redirect('/stores/list');
         } else {
             res.redirect('/login');
         }
