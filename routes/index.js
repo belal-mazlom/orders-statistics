@@ -159,17 +159,28 @@ module.exports = function (passport, pool, fs, appConfig) {
                 pool.getConnection(function (err, connection) {
                     if (err) return;
 
-                    connection.query('INSERT INTO `store` SET ?', {
-                        title: req.body.title,
-                        url: req.body.url,
-                        token: token,
-                        last_update: null,
-                        status: 1
-                    }, function (err, result) {
-                        if (err) return;
+                    var storeURL = req.body.url;
+                    var storeTitle = req.body.title;
+                    var urlParts = /^(?:\w+\:\/\/)?([^\/]+)(.*)$/.exec(storeURL);
+                    if(urlParts.length > 1){
+                        var hostname =urlParts[1];
+                        connection.query("SELECT id FROM `store` where url like '%"+hostname+"%' or `title` like '%"+hostname+"%'", function (err, rows, fields) {
+                            if (err) return;
+                            if (rows.length < 1) {
+                                connection.query('INSERT INTO `store` SET ?', {
+                                    title: storeTitle,
+                                    url: storeURL,
+                                    token: token,
+                                    last_update: null,
+                                    status: 1
+                                }, function (err, result) {
+                                    if (err) return;
+                                    connection.release();
+                                });
+                            }
+                        });
+                    }
 
-                        connection.release();
-                    });
                 });
 
                 res.send('Done');
