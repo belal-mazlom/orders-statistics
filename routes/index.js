@@ -805,7 +805,7 @@ module.exports = function (passport, pool, fs, appConfig) {
 
         pool.getConnection(function (err, connection) {
             if (err) return;
-            fs.readFile("../collected_data/" + filename, "utf8", function (error, data) {
+            fs.readFile(__dirname + "/../collected_data/" + filename, "utf8", function (error, data) {
 
                 csv.parse(data, {comment: '#'}, function (err, output) {
                     console.log("Start parsing");
@@ -834,15 +834,17 @@ module.exports = function (passport, pool, fs, appConfig) {
                                         create_date: row[11]
                                     }, function (err, result) {
                                         if (err) console.log(err);
-                                        connection.release();
                                     });
-                                console.log("Inserting");
+                                console.log("Inserted");
                             } catch (e) {
                                 console.log(e);
                             }
                         }
+                        connection.release();
                     }
                 });
+
+                if(error)
                 console.log("file:...", error);
 
                 fs.unlink(__dirname + '/../collected_data/' + filename, function () {
