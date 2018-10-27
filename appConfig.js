@@ -4,8 +4,8 @@
 var mysqlConfig = {
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'shopgo_statistics',
+    password: '',
+    database: 'statistics',
     connectionLimit: 150,
     debug: false
 };

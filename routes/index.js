@@ -834,8 +834,9 @@ module.exports = function (passport, pool, fs, appConfig) {
                                         create_date: row[11]
                                     }, function (err, result) {
                                         if (err) console.log(err);
+                                        else
+                                            console.log("Inserted");
                                     });
-                                console.log("Inserted");
                             } catch (e) {
                                 console.log(e);
                             }
